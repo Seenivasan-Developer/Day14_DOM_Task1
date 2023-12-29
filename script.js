@@ -47,6 +47,7 @@ function radio_create(ele_name,attr_name_1,attr_value_1,attr_name_2,attr_value_2
     radio.setAttribute(attr_name_3,attr_value_3);
     radio.className=rdo_class;
     radio.id = id_val_1;
+    radio.required=true;
     return radio;
 }
 function btn_create(ele_name,attr_name_1,attr_value_1,attr_name_2,attr_value_2,id_val_1,content,btn_class){
@@ -175,6 +176,8 @@ document.body.append(head1,div_par);
 function Form_Submit(event){
     event.preventDefault();
     var selectedvalues=$("#inpfood").val();
+    var genderval = document.querySelector('input[name="gender"]:checked');
+
     if (selectedvalues && selectedvalues.length >= 2) {
     var tbl=document.querySelector("table");
     var newrow=tbl.insertRow(tbl.rows.length);
@@ -189,18 +192,20 @@ td4.innerHTML=document.getElementById("address").value;
 var td5=newrow.insertCell(4);
 td5.innerHTML=document.getElementById("pincode").value;
 var td6=newrow.insertCell(5);
-td6.innerHTML=document.getElementById("inpgender").value;
+td6.innerHTML=genderval.value;
 var td7=newrow.insertCell(6);
 td7.innerHTML=selectedvalues.join(", ");
 var td8=newrow.insertCell(7);
-td8.innerHTML=document.getElementById("inpstate").value;
+td8.innerHTML=document.getElementById("state").value;
 var td9=newrow.insertCell(8);
-td9.innerHTML=document.getElementById("inpcountry").value;
+td9.innerHTML=document.getElementById("country").value;
 
-   //var arr= [...document.querySelectorAll("input")];
-   var arr= [...document.getElementsByTagName("input")];
+   var arr= [...document.querySelectorAll('input[type="text"]')];
    arr.map((ele)=>ele.value="");
-   document.getElementById("inpgender").selectedIndex=0;
+   var arr1= [...document.querySelectorAll('input[type="radio"]')];
+   arr1.map((ele)=>ele.checked=false);
+   
+   document.getElementById("address").value="";
    $('#inpfood').val(null).trigger('change');
    return true;
     }
